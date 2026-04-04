@@ -17,7 +17,9 @@ def run_flask():
 API_ID = int(os.environ.get("API_ID", "30141094"))
 API_HASH = os.environ.get("API_HASH", "edb173924ee7640a463f2484332041d7")
 BOT_TOKEN = os.environ.get("BOT_TOKEN", "7732935571:AAEpo4NO_EaRh17tvq5UMQ0LoT20xWZYnrk")
-APK_FILE_ID = "BQACAgUAAxkDAAMLadEnFiLJhPQ1irJKzKK-rdzQ-pMAAq0aAALjflFWa0EWTZiLPYgeBA"
+
+# Teri Nayi APK ID jo tune abhi screenshot mein dikhayi
+APK_FILE_ID = "BQACAgUAAxkDAAMSadErzNbwNtV802jrAgfwu9YazmYAAq0aAALjflFWa0EWTZiLPYgeBA"
 
 CAPTION_MSG = (
     "🔴 **LIVE ( 1/1 ) SESSION📈**\n"
@@ -32,22 +34,24 @@ CAPTION_MSG = (
 
 app = Client("rohit_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
-# --- ONLY SEND APK (NO AUTO-APPROVE) ---
+# --- ONLY SEND APK (SAB KUCH FIX KAR DIYA HAI) ---
 @app.on_chat_join_request()
 async def send_only_apk(client, message: ChatJoinRequest):
-    user_id = message.from_user.id
     try:
-        # Seedha User ko APK aur Message bhejo
+        # Seedha User ko APK aur Professional Message bhejo
         await client.send_document(
-            chat_id=user_id,
+            chat_id=message.from_user.id,
             document=APK_FILE_ID,
             caption=CAPTION_MSG
         )
-        print(f"✅ APK Sent to: {message.from_user.first_name} (Request Pending)")
+        print(f"✅ APK Sent to: {message.from_user.first_name}")
     except Exception as e:
         print(f"❌ Error: {e}")
 
 if __name__ == "__main__":
+    # Flask ko background mein chalao
     threading.Thread(target=run_flask).start()
+    # Bot start
+    print("🚀 Bot is running professionally...")
     app.run()
     
