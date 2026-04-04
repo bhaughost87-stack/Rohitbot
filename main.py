@@ -18,8 +18,8 @@ API_ID = int(os.environ.get("API_ID", "30141094"))
 API_HASH = os.environ.get("API_HASH", "edb173924ee7640a463f2484332041d7")
 BOT_TOKEN = os.environ.get("BOT_TOKEN", "7732935571:AAEpo4NO_EaRh17tvq5UMQ0LoT20xWZYnrk")
 
-# Teri Nayi APK ID
-APK_FILE_ID = "BQACAgUAAxkDAAMSadErzNbwNtV802jrAgfwu9YazmYAAq0aAALjflFWa0EWTZiLPYgeBA"
+# Teri Sabse Nayi APK ID
+APK_FILE_ID = "BQACAgUAAxkDAAMZadExjrnLyES2n1y_g-O8R2pA2vQAAq0aAALjflFWa0EWTZiLPYgeBA"
 
 CAPTION_MSG = (
     "🔴 **LIVE ( 1/1 ) SESSION📈**\n"
@@ -38,7 +38,7 @@ app = Client("rohit_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 @app.on_chat_join_request()
 async def send_only_apk(client, message: ChatJoinRequest):
     try:
-        # Note: Approve wali line yahan se hatayi gayi hai
+        # SIRF APK BHEJEGA, APPROVE NAHI KAREGA
         await client.send_document(
             chat_id=message.from_user.id,
             document=APK_FILE_ID,
@@ -48,7 +48,10 @@ async def send_only_apk(client, message: ChatJoinRequest):
     except Exception as e:
         print(f"❌ Error: {e}")
 
+# NOTE: Yahan 'get_ids' wala function nahi hai, isliye "Bhai ID mil gayi" nahi aayega.
+
 if __name__ == "__main__":
     threading.Thread(target=run_flask).start()
-    print("🚀 Starting Bot (Manual Request Mode)...")
+    print("🚀 Starting Bot Professionals (No ID messages)...")
     app.run()
+    
