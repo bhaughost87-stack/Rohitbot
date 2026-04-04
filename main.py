@@ -4,14 +4,15 @@ from flask import Flask
 from pyrogram import Client, filters
 from pyrogram.types import ChatJoinRequest
 
-# --- DUMMY SERVER FOR RENDER FREE TIER ---
+# --- RENDER PORT FIX ---
+# Ye part Render ko "Live" dikhayega bina timeout ke
 flask_app = Flask(__name__)
 @flask_app.route('/')
 def health_check():
-    return "Bot is running!"
+    return "Bot is active!"
 
 def run_flask():
-    # Render port 10000 mangta hai
+    # Render hamesha port 10000 dhoondta hai
     flask_app.run(host='0.0.0.0', port=10000)
 
 # --- BOT CONFIG ---
@@ -20,7 +21,7 @@ API_HASH = os.environ.get("API_HASH", "edb173924ee7640a463f2484332041d7")
 BOT_TOKEN = os.environ.get("BOT_TOKEN", "7732935571:AAEpo4NO_EaRh17tvq5UMQ0LoT20xWZYnrk")
 APK_FILE_ID = "BQACAgUAAxkBAAMHadEVOlUCXj8zQCOcgsaJDyX52b0AAq0aAALjflFWa0EWTZiLPYgeBA"
 
-app = Client("dost_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
+app = Client("rohit_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
 @app.on_chat_join_request()
 async def auto_approve(client, message: ChatJoinRequest):
@@ -31,7 +32,7 @@ async def auto_approve(client, message: ChatJoinRequest):
         print(f"Error: {e}")
 
 if __name__ == "__main__":
-    # Flask ko background mein chalao taaki Render khush rahe
+    # Flask ko background mein chalana zaroori hai
     threading.Thread(target=run_flask).start()
-    # Bot start karo
+    # Phir bot start karo
     app.run()
